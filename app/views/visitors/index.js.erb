@@ -1,0 +1,6 @@
+<% fd = FetchData.new %>
+<% fd.update_cache %>
+
+<% @qualifications = Qualification.all %>
+
+$('#qualificationsContainer').html("<%= escape_javascript(render('visitors/qualifications')) %>")

@@ -4,7 +4,7 @@ class CreateSubjects < ActiveRecord::Migration
       t.string :uuid
       t.string :title
       t.text :link
-      t.string :color
+      t.string :colour
 
       t.timestamps null: false
     end

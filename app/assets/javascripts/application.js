@@ -15,3 +15,11 @@
 //= require bootstrap-sprockets
 //= require bootstrap
 //= require_tree .
+
+$(document).ready(function() {
+  $('#refreshQualifications').click(function() {
+    $.getScript(this.href);
+    $('#qualificationsContainer').html("<p style='font-style:italics;font-weight:bold;'>Refreshing qualifications...</p>");
+    return false;
+  })
+});
