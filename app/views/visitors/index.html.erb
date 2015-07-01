@@ -1,1 +1,39 @@
-<h3>Welcome</h3>
+<!-- Portfolio Grid Section -->
+<section id="qualifications">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Qualifications</h2>
+                <hr class="star-primary">
+            </div>
+            <p style="text-align:center;">Click on the qualification to view the subjects.</p>
+        </div>
+        <div class="row">
+          <div class="panel-group col-lg-12 text-center" id="accordion" role="tablist" aria-multiselectable="true">
+          <% @qualifications.each do |qualification| %>
+            <div class="col-sm-4 portfolio-item" style="padding-bottom:10px;">
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="heading<%= qualification['id'] %>">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= qualification['id'] %>" aria-expanded="false" aria-controls="collapse<%= qualification['id'] %>" class="qual-button">
+                      <%= qualification['name'] %>
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapse<%= qualification['id'] %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= qualification['id'] %>">
+                  <div class="panel-body" style="text-align:left;">
+                    <p><b>Subjects</b></p>
+                    <ul>
+                    <% qualification['subjects'].each do |subject| %>
+                      <li><span style="color:<%= subject['colour'] %>;"><%= subject['title'] %></span></li>
+                    <% end %>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          </div>
+        </div>
+    </div>
+</section>
