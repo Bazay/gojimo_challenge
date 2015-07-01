@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150701153829) do
+ActiveRecord::Schema.define(version: 20150701174516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,11 +26,19 @@ ActiveRecord::Schema.define(version: 20150701153829) do
 
   add_index "qualifications", ["uuid", "name"], name: "index_qualifications_on_uuid_and_name", using: :btree
 
+  create_table "qualifications_subjects", id: false, force: :cascade do |t|
+    t.integer "subject_id"
+    t.integer "qualification_id"
+  end
+
+  add_index "qualifications_subjects", ["qualification_id"], name: "index_qualifications_subjects_on_qualification_id", using: :btree
+  add_index "qualifications_subjects", ["subject_id"], name: "index_qualifications_subjects_on_subject_id", using: :btree
+
   create_table "subjects", force: :cascade do |t|
     t.string   "uuid"
     t.string   "title"
     t.text     "link"
-    t.string   "color"
+    t.string   "colour"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

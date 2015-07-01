@@ -1,39 +1,119 @@
-<!-- Portfolio Grid Section -->
-<section id="qualifications">
+<!-- The Challenge -->
+<section id="challenge">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2>Qualifications</h2>
+                <h2>Challenge</h2>
                 <hr class="star-primary">
             </div>
-            <p style="text-align:center;">Click on the qualification to view the subjects.</p>
+        </div>
+        <div class="row" style="text-align:center">
+            <div class="col-lg-4 col-lg-offset-2">
+              <h3>Primary Goals</h3>
+                <p>Develop a very simple working application on your chosen platform (Android / iOS / Web) with the following functionality:</p>
+                <ol>
+                  <li>Read the following JSON feed containing a list of qualifications: <a href="https://api.gojimo.net/api/v4/qualifications">https://api.gojimo.net/api/v4/qualifications</a></li>
+                  <li>Display a list of qualifications based on the data provided by the feed.</li>
+                  <li>Allow users to click a qualification to be presented with a list of subjects for that qualification.</li>
+                </ol>
+            </div>
+            <div class="col-lg-4">
+              <h3>Bonus Goals</h3>
+              <p>Whilst not essential, we will be very pleased to see you take the challenge further by:</p>
+              <ol>
+                <li>Using the data provided to its full potential by taking advantage of fields like colour for subjects.</li>
+                <li>Making the GUI as appealing and responsive as possible.</li>
+                <li>Storing the data locally and refresh from the server as requested, taking advantage of the HTTP headers to avoid downloads of non-stale data.</li>
+                <li>Unit testing your code.</li>
+              </ol>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+              <%= link_to '<i class="fa fa-download"> View Original PDF</i>'.html_safe, "https://drive.google.com/file/d/0B-69eeQ0zLgbd2txTVBRd1VEc2x4RnFGczZtODZLWnRPT0hJ/view?usp=sharing", class: "btn btn-success btn-lg" %>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="success" id="instructions">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Instructions</h2>
+                <hr class="star-light">
+            </div>
+            <p class="text-center">The purpose of this section is to explain how I approached the questions given in the <a class="page-scroll" href="#challenge">Challenge</a> section above.</p>
+        </div>
+        <div class="row text-center">
+            <div class="col-lg-4 col-lg-offset-2">
+              <h3>Primary Goals</h3>
+                <p>The platform chosen to solve the above Challenge is Web i.e. Ruby on Rails:</p>
+                <ol>
+                  <li>
+                    Read the following JSON feed containing a list of qualifications: <a href="https://api.gojimo.net/api/v4/qualifications">https://api.gojimo.net/api/v4/qualifications</a><br>
+                    <b>The reading of the JSON feed is performed by the fetch_data.rb Class located under app/services</b>
+                  </li>
+                  <li>Display a list of qualifications based on the data provided by the feed.<br>
+                  <b>Qualifications are displayed in the solution section in alphabetic order.</b>
+                  </li>
+                  <li>Allow users to click a qualification to be presented with a list of subjects for that qualification.
+                  <b>Qualifications are displayed as accordions, which when clicked expand to show the subjects for that qualification in list form.</b>
+                  </li>
+                </ol>
+            </div>
+            <div class="col-lg-4">
+              <h3>Bonus Goals</h3>
+              <p>Whilst not essential, we will be very pleased to see you take the challenge further by:</p>
+              <ol>
+                <li>Using the data provided to its full potential by taking advantage of fields like colour for subjects.
+                <br><b>I chose simply to take advantage of colour for subjects. I did however notice that each qualification had a 'default_products' field - I did not choose to implement this however because it would work similarly to subjects in the back-end and hence implementing it would not showcase a greater level of my ability for the purposes of this demonstration.</b>
+                </li>
+                <li>Making the GUI as appealing and responsive as possible.<br>
+                <b>I chose to use a skin called Freelancer, as showcased <a href="http://startbootstrap.com/template-overviews/freelancer/">here</a> and made edits where I saw appropriate.</b>
+                </li>
+                <li>Storing the data locally and refresh from the server as requested, taking advantage of the HTTP headers to avoid downloads of non-stale data.<br>
+                <b>I chose to store data in tables i.e. Qualification and Subject tables and then made a has_and_belongs_to_many relation between the two with help of a joins table.</b>
+                </li>
+                <li>Unit testing your code.<br>
+                <b>The unit tests were completed using rspec. Hence they can be found under the /spec folder (/spec/services/fetch_data.rb, /spec/models/qualifications, /spec/models/subjects</b></li>
+              </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Qualifications Section -->
+<section id="solution">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Solution</h2>
+                <hr class="star-primary">
+            </div>
+            <button type="button" class="btn btn-success btn-lg" style="display:table;margin:0 auto;margin-bottom:1em;" remote="true" id="refreshQualifications">
+              <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Refresh Qualifications
+            </button>
         </div>
         <div class="row">
           <div class="panel-group col-lg-12 text-center" id="accordion" role="tablist" aria-multiselectable="true">
-          <% @qualifications.each do |qualification| %>
-            <div class="col-sm-4 portfolio-item" style="padding-bottom:10px;">
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading<%= qualification['id'] %>">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%= qualification['id'] %>" aria-expanded="false" aria-controls="collapse<%= qualification['id'] %>" class="qual-button">
-                      <%= qualification['name'] %>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapse<%= qualification['id'] %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= qualification['id'] %>">
-                  <div class="panel-body" style="text-align:left;">
-                    <p><b>Subjects</b></p>
-                    <ul>
-                    <% qualification['subjects'].each do |subject| %>
-                      <li><span style="color:<%= subject['colour'] %>;"><%= subject['title'] %></span></li>
-                    <% end %>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+            <div id="qualificationsContainer">
+              <%= render 'qualifications' %>
             </div>
-          <% end %>
           </div>
+        </div>
+    </div>
+</section>
+
+<section class="success" id="repo">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Git Repo</h2>
+                <hr class="star-light">
+            </div>
+            <p class="text-center">You can view the source code and download this website for yourself by clicking the button below.</p>
+            <a href="https://github.com/Bazay/gojimo_challenge" class="btn btn-outline btn-lg" style="display:table;margin:0 auto;margin-bottom:1em;">
+              <i class="fa fa-download"></i> View Github Repository
+            </a>
         </div>
     </div>
 </section>
